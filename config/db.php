@@ -1,10 +1,10 @@
 <?php
 // config/db.php
 
-$host = '127.0.0.1';
-$db   = 'bz';
-$user = 'root';
-$pass = '';
+$host = 'db.fr-roub1.bengt.wasmernet.com';
+$db   = 'bz_admin';
+$user = 'user_60fbf397';
+$pass = 'pw_V2ga5bdaPsEyMpihzfgaj9xi9ePisS8M';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
