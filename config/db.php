@@ -2,9 +2,9 @@
 // config/db.php
 
 $host = 'db.fr-roub1.bengt.wasmernet.com';
-$db   = 'bloomscentz';
-$user = 'user_23e759c2';
-$pass = 'pw_uaaykXCZZCrIrK8VbfkGo1GcjXLb577P';
+$db   = 'bz_admin';
+$user = 'user_60fbf397';
+$pass = 'pw_V2ga5bdaPsEyMpihzfgaj9xi9ePisS8M';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
