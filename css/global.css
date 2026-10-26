@@ -1,0 +1,839 @@
+/* css/global.css */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+    /* Color Palette - Strict Monochrome */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f4f5;
+    --bg-tertiary: #e4e4e7;
+    --text-primary: #09090b;
+    --text-secondary: #71717a;
+    --text-muted: #a1a1aa;
+    --border-color: #e4e4e7;
+    --accent-color: #000000;
+    --accent-text: #ffffff;
+    
+    /* Hover and active states */
+    --hover-bg: #f4f4f5;
+    --active-bg: #e4e4e7;
+    
+    /* Layout Constants */
+    --sidebar-width: 80px;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Mode class override */
+body.dark {
+    --bg-primary: #09090b;
+    --bg-secondary: #18181b;
+    --bg-tertiary: #27272a;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --text-muted: #52525b;
+    --border-color: #27272a;
+    --accent-color: #ffffff;
+    --accent-text: #09090b;
+    --hover-bg: #27272a;
+    --active-bg: #3f3f46;
+}
+
+/* --- Base Resets --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* --- Main Layout Grid --- */
+.app-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* --- Sidebar Navigation --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    height: 100%;
+    z-index: 100;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.sidebar-logo {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    width: 100%;
+    align-items: center;
+}
+
+.sidebar-link {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.sidebar-link:hover {
+    color: var(--text-primary);
+    background-color: var(--hover-bg);
+}
+
+.sidebar-link.active {
+    color: var(--accent-text);
+    background-color: var(--accent-color);
+}
+
+.sidebar-link svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2;
+}
+
+/* Tooltips */
+.sidebar-link::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 64px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-8px);
+    background-color: var(--accent-color);
+    color: var(--accent-text);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.sidebar-link:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+}
+
+.theme-toggle:hover {
+    background-color: var(--hover-bg);
+}
+
+/* --- Content Wrapper --- */
+.content-wrapper {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+}
+
+/* --- Common UI Components --- */
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.section-title {
+    font-size: 28px;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+}
+
+/* Buttons */
+.btn {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: var(--hover-bg);
+}
+
+.btn:active {
+    background-color: var(--active-bg);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--accent-text);
+    border-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+}
+
+body.dark .btn-primary:hover {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+}
+
+.btn-icon {
+    padding: 8px;
+    border-radius: 6px;
+}
+
+/* Inputs & Forms */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px var(--bg-tertiary);
+}
+
+/* Tables */
+.table-container {
+    width: 100%;
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+}
+
+.table th {
+    background-color: var(--bg-secondary);
+    padding: 12px 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover td {
+    background-color: var(--hover-bg);
+}
+
+/* Badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.badge-outline {
+    background-color: transparent;
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+}
+
+.badge-success {
+    background-color: var(--accent-color);
+    color: var(--accent-text);
+    border-color: var(--accent-color);
+}
+
+/* Modal Dialog */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 480px;
+    max-height: calc(100vh - 80px);
+    box-shadow: var(--shadow-md);
+    transform: scale(0.95);
+    transition: transform var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 24px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    background-color: var(--bg-secondary);
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+    flex-shrink: 0;
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.flex { display: flex; }
+.align-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-16 { margin-bottom: 16px; }
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* --- Waybill Print & Preview Style --- */
+.waybill-paper {
+    width: 4.25in;
+    min-height: 6.0in;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Inter', -apple-system, sans-serif;
+    padding: 0.25in;
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+.waybill-paper * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+/* Force waybill card styles even in dark mode preview */
+body.dark .waybill-paper {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #e0e0e0 !important;
+}
+body.dark .waybill-paper * {
+    color: #000000 !important;
+    border-color: #e0e0e0 !important;
+}
+
+
+.waybill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.waybill-title-banner {
+    background-color: #000000;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 4px 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+body.dark .waybill-title-banner {
+    color: #ffffff !important;
+    background-color: #000000 !important;
+}
+
+.waybill-order-number {
+    text-align: right;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.waybill-order-number span {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    color: #000000;
+}
+
+.waybill-brand {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+}
+
+.waybill-billing {
+    font-size: 9px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+.waybill-billing-title {
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    font-size: 9px;
+}
+
+.waybill-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8px;
+    margin-bottom: 10px;
+}
+
+.waybill-table th {
+    background-color: #000000;
+    color: #ffffff !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 3px 4px;
+    text-align: left;
+}
+body.dark .waybill-table th {
+    color: #ffffff !important;
+    background-color: #000000 !important;
+}
+
+.waybill-table td {
+    padding: 3px 4px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.waybill-table tr:last-child td {
+    border-bottom: 1px solid #000000;
+}
+
+.waybill-totals {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 9px;
+    gap: 2px;
+    margin-bottom: 10px;
+}
+
+.waybill-totals-line {
+    display: flex;
+    justify-content: space-between;
+    width: 110px;
+}
+
+.waybill-totals-line.grand-total {
+    font-weight: 800;
+    border-top: 1px solid #000000;
+    padding-top: 2px;
+    font-size: 10px;
+}
+
+.waybill-footer-banner {
+    background-color: #000000;
+    color: #ffffff !important;
+    font-size: 7px;
+    text-align: center;
+    padding: 3px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-around;
+}
+body.dark .waybill-footer-banner {
+    color: #ffffff !important;
+    background-color: #000000 !important;
+}
+
+/* --- Print layout styling --- */
+@media print {
+    /* Set Page Setup: 4.25in x 6.5in with 0.2in page margin on all printed sheets */
+    @page {
+        size: 4.25in 6.5in;
+        margin: 0.2in;
+    }
+
+    /* Hide everything on screen except the waybill modal wrapper */
+    body > *:not(#waybillModal) {
+        display: none !important;
+    }
+
+    /* Reset background and text colors for print */
+    html, body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Reset modal wrappers to zero space passthrough */
+    #waybillModal,
+    #waybillModal .modal-content,
+    #waybillModal .modal-body,
+    #waybillPaper {
+        display: block !important;
+        position: static !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    #waybillModal .modal-header,
+    #waybillModal .modal-footer {
+        display: none !important;
+    }
+
+    /* The waybill paper frame matching the preview layout */
+    .waybill-paper {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+        height: auto !important;
+        border: 1px solid #000000 !important;
+        border-radius: 4px !important;
+        box-shadow: none !important;
+        padding: 0.15in !important;
+        margin: 0 !important;
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .waybill-paper * {
+        color: #000000;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Black banner headers in print */
+    .waybill-title-banner,
+    .waybill-table th,
+    .waybill-footer-banner {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .waybill-title-banner *,
+    .waybill-table th *,
+    .waybill-footer-banner * {
+        color: #ffffff !important;
+    }
+
+    /* Table flow & page breaks for excess records */
+    .waybill-table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    .waybill-table thead {
+        display: table-header-group !important;
+    }
+
+    .waybill-table tbody {
+        display: table-row-group !important;
+    }
+
+    .waybill-table tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* Totals and footer stay unbroken */
+    .waybill-totals,
+    .waybill-footer-banner {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-top: 10px !important;
+    }
+}
+
+
+/* Waybill Page Number */
+.waybill-page-number {
+    font-size: 7px;
+    margin-left: auto;
+    color: #ffffff !important;
+}
+
+/* Refined Print Styles */
+@media print {
+    @page {
+        size: 4.25in 6.5in;
+        margin: 0.2in;
+    }
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        color: #000 !important;
+    }
+    body > *:not(#waybillModal) {
+        display: none !important;
+    }
+    #waybillModal,
+    #waybillModal .modal-content,
+    #waybillModal .modal-body,
+    #waybillPaper {
+        display: block !important;
+        position: static !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    #waybillModal .modal-header,
+    #waybillModal .modal-footer {
+        display: none !important;
+    }
+    .waybill-paper {
+        width: 4.25in !important;
+        min-height: 6.5in !important;
+        border: 1px solid #000000 !important;
+        border-radius: 4px !important;
+        box-shadow: none !important;
+        padding: 0.15in !important;
+        margin: 0 !important;
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        box-sizing: border-box !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .waybill-paper * {
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .waybill-title-banner,
+    .waybill-table th,
+    .waybill-footer-banner {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .waybill-paper .waybill-title-banner,
+    .waybill-paper .waybill-title-banner *,
+    .waybill-paper .waybill-table th,
+    .waybill-paper .waybill-table th *,
+    .waybill-paper .waybill-footer-banner,
+    .waybill-paper .waybill-footer-banner * {
+        color: #ffffff !important;
+        background-color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .waybill-table thead tr {
+        page-break-inside: avoid;
+    }
+    .waybill-table tbody tr {
+        page-break-inside: avoid;
+    }
+    .waybill-totals,
+    .waybill-footer-banner {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+}

@@ -1,0 +1,302 @@
+/* css/orders.css */
+
+/* --- Layout Grid --- */
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: calc(100vw - var(--sidebar-width));
+}
+
+.orders-section {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 40px;
+    background-color: var(--bg-secondary);
+    overflow: hidden;
+    transition: background-color var(--transition-fast);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    flex-shrink: 0;
+}
+
+.section-header .subtitle {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Filters */
+.table-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+}
+
+.search-box {
+    position: relative;
+    width: 200px;
+    flex-shrink: 1;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--text-secondary);
+}
+
+.search-input {
+    padding-left: 38px !important;
+    font-size: 10px;
+}
+
+.select-filter {
+    width: 130px !important;
+    cursor: pointer;
+    flex-shrink: 1;
+    font-size: 10px;
+}
+
+/* Date filters */
+.date-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.date-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.date-input {
+    width: 115px !important;
+    cursor: pointer;
+    flex-shrink: 1;
+    font-size: 10px;
+}
+
+/* --- Orders Stats Bar --- */
+.orders-stats-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.stat-chip {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 130px;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+}
+
+.stat-value.positive {
+    color: var(--text-primary);
+}
+
+/* Table styling override */
+.table-container {
+    flex: 1;
+    overflow-y: auto;
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+/* Status toggler dropdown in table */
+.status-select,
+.payment-status-select,
+.commission-status-select {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+.status-select:focus,
+.payment-status-select:focus,
+.commission-status-select:focus {
+    border-color: var(--accent-color);
+}
+
+/* Large Modal styling for details */
+.modal-large {
+    max-width: 800px !important;
+    width: 90%;
+}
+
+.order-details-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.detail-meta-box {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.detail-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.detail-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.detail-value-sub {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.invoice-table-wrapper {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    transition: border-color var(--transition-fast);
+}
+
+.invoice-table th,
+.invoice-table td {
+    padding: 12px 16px;
+}
+
+.invoice-summary-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.commission-highlight-box {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.commission-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    margin-top: 8px;
+}
+
+.invoice-totals-box {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.summary-line.grand-total-line {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-color);
+    margin-top: 8px;
+}
+
+/* Toast styling */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: var(--accent-color);
+    color: var(--accent-text);
+    padding: 12px 24px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-md);
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 2000;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
